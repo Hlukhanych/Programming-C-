@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Програмування\\lab1\\ex2\\ex2\\ex2.csproj": {}
+    "C:\\Users\\user\\Documents\\GitHub\\Programming-CS\\lab1\\ex2\\ex2\\ex2.csproj": {}
   },
   "projects": {
-    "E:\\Програмування\\lab1\\ex2\\ex2\\ex2.csproj": {
+    "C:\\Users\\user\\Documents\\GitHub\\Programming-CS\\lab1\\ex2\\ex2\\ex2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Програмування\\lab1\\ex2\\ex2\\ex2.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Documents\\GitHub\\Programming-CS\\lab1\\ex2\\ex2\\ex2.csproj",
         "projectName": "ex2",
-        "projectPath": "E:\\Програмування\\lab1\\ex2\\ex2\\ex2.csproj",
+        "projectPath": "C:\\Users\\user\\Documents\\GitHub\\Programming-CS\\lab1\\ex2\\ex2\\ex2.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "E:\\Програмування\\lab1\\ex2\\ex2\\obj\\",
+        "outputPath": "C:\\Users\\user\\Documents\\GitHub\\Programming-CS\\lab1\\ex2\\ex2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",

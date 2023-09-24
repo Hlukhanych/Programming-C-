@@ -5,38 +5,41 @@ namespace lab1
     class Program
     {
 
-        public static double ArithmeticMeanPar(Queue<int> queue)
+        public static double ArithmeticMeanPar(Queue<int> numbers)
         {
-            double a = 0;
+            double sum = 0;
             int count = 0;
-            int[] arr = new int[queue.Count];
-            queue.CopyTo(arr, 0);
-            for (int i = 0; i < arr.Length; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    a += arr[i];
-                    count++;
-                }
-            }
-            return a / count;
-        }
+            bool isEvenPosition = false;
 
-        public static double ArithmeticMeanNePar(Queue<int> queue)
-        {
-            double a = 0;
-            int count = 0;
-            int[] arr = new int[queue.Count];
-            queue.CopyTo(arr, 0);
-            for (int i = 0; i < arr.Length; i++)
+            foreach (int number in numbers)
             {
-                if (i % 2 != 0)
+                if (isEvenPosition)
                 {
-                    a += arr[i];
+                    sum += number;
                     count++;
                 }
+                isEvenPosition = !isEvenPosition;
             }
-            return a / count;
+
+            return sum / count;
+        }
+        public static double ArithmeticMeanNePar(Queue<int> numbers)
+        {
+            double sum = 0;
+            int count = 0;
+            bool isOddPosition = true;
+
+            foreach (int number in numbers)
+            {
+                if (isOddPosition)
+                {
+                    sum += number;
+                    count++;
+                }
+                isOddPosition = !isOddPosition;
+            }
+
+            return sum / count;
         }
         static void Main(string[] args)
         {
