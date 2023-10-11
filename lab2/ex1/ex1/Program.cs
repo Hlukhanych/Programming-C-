@@ -7,17 +7,22 @@ namespace lab1
     {
         static void Main(string[] args)
         {
-            Sudent s1 = new Sudent(1, "Ivanenko", "Physical", 2, "ochna");
-            Sudent s2 = new Sudent(2, "Ovcharenko", "Philological", 3, "ochna");
-            Sudent s3 = new Sudent(3, "Stepanenko", "Mathematical", 2, "ochna");
-            Sudent s4 = new Sudent(4, "Smirnov", "Mathematical", 1, "ochna");
-            Sudent s5 = new Sudent(5, "Ivanov", "Mathematical", 3, "zaochna");
-
-            List<Sudent> students = new List<Sudent>() { s1, s2, s3, s4, s5 };
-
-            foreach (var student in students)
+            List<Sudent> students = new List<Sudent>()
             {
-                
+                new Sudent(1, "Ivanenko", "Physical", 2, "ochna"),
+                new Sudent(2, "Ovcharenko", "Philological", 3, "ochna"),
+                new Sudent(3, "Stepanenko", "Mathematical", 2, "zaochna"),
+                new Sudent(4, "Smirnov", "Mathematical", 1, "ochna"),
+                new Sudent(5, "Ivanov", "Mathematical", 3, "ochna"),
+                new Sudent(6, "Halin", "Physical", 3, "zaochna"),
+                new Sudent(7, "Malcev", "Philological", 2, "zaochna"),
+                new Sudent(8, "Svin", "Engineering", 1, "zaochna")
+            };
+
+            var newList = students.OrderBy(x => x.Course).Where(x => x.FormOfEducation == "zaochna");
+            foreach (var student in newList)
+            {
+                Console.WriteLine(student.ToString());
             }
         }
     }

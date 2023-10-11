@@ -31,5 +31,10 @@ namespace ex1
             Course = course;
             FormOfEducation = formOfEducation;
         }
+
+        public override string ToString()
+        {
+            return $"RecordBookNumber: {RecordBookNumber}, Surname: {Surname}, Faculty: {Faculty}, Course: {Course}, FormOfEducation: {FormOfEducation}";
+        }
     }
 }
