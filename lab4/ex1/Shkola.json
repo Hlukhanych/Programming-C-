@@ -1,0 +1,152 @@
+[
+    {
+        "LastName": "Петренко",
+        "Gender": "жін.",
+        "Class": {
+            "Year": "9",
+            "Letter": "А"
+        },
+        "Grade1": 5,
+        "Grade2": 4
+    },
+    {
+        "LastName": "Іванов",
+        "Gender": "чол.",
+        "Class": {
+            "Year": "10",
+            "Letter": "Б"
+        },
+        "Grade1": 3,
+        "Grade2": 4
+    },
+    {
+        "LastName": "Сидоренко",
+        "Gender": "жін.",
+        "Class": {
+            "Year": "11",
+            "Letter": "В"
+        },
+        "Grade1": 5,
+        "Grade2": 5
+    },
+    {
+        "LastName": "Мельник",
+        "Gender": "жін.",
+        "Class": {
+            "Year": "9",
+            "Letter": "А"
+        },
+        "Grade1": 4,
+        "Grade2": 3
+    },
+    {
+        "LastName": "Коваленко",
+        "Gender": "чол.",
+        "Class": {
+            "Year": "10",
+            "Letter": "Б"
+        },
+        "Grade1": 5,
+        "Grade2": 4
+    },
+    {
+        "LastName": "Бондар",
+        "Gender": "чол.",
+        "Class": {
+            "Year": "11",
+            "Letter": "В"
+        },
+        "Grade1": 4,
+        "Grade2": 5
+    },
+    {
+        "LastName": "Ткаченко",
+        "Gender": "жін.",
+        "Class": {
+            "Year": "9",
+            "Letter": "А"
+        },
+        "Grade1": 3,
+        "Grade2": 3
+    },
+    {
+        "LastName": "Кравець",
+        "Gender": "чол.",
+        "Class": {
+            "Year": "10",
+            "Letter": "Б"
+        },
+        "Grade1": 5,
+        "Grade2": 5
+    },
+    {
+        "LastName": "Савченко",
+        "Gender": "жін.",
+        "Class": {
+            "Year": "11",
+            "Letter": "В"
+        },
+        "Grade1": 4,
+        "Grade2": 4
+    },
+    {
+        "LastName": "Павленко",
+        "Gender": "чол.",
+        "Class": {
+            "Year": "9",
+            "Letter": "А"
+        },
+        "Grade1": 4,
+        "Grade2": 3
+    },
+    {
+        "LastName": "Даниленко",
+        "Gender": "жін.",
+        "Class": {
+            "Year": "10",
+            "Letter": "Б"
+        },
+        "Grade1": 5,
+        "Grade2": 4
+    },
+    {
+        "LastName": "Мазур",
+        "Gender": "чол.",
+        "Class": {
+            "Year": "11",
+            "Letter": "В"
+        },
+        "Grade1": 4,
+        "Grade2": 4
+    },
+    {
+        "LastName": "Степаненко",
+        "Gender": "жін.",
+        "Class": {
+            "Year": "10",
+            "Letter": "А"
+        },
+        "Grade1": 4,
+        "Grade2": 4
+    },
+    {
+        "LastName": "Мороз",
+        "Gender": "чол.",
+        "Class": {
+            "Year": "11",
+            "Letter": "А"
+        },
+        "Grade1": 4,
+        "Grade2": 5
+    },
+    {
+        "LastName": "Білик",
+        "Gender": "жін.",
+        "Class": {
+            "Year": "9",
+            "Letter": "В"
+        },
+        "Grade1": 3,
+        "Grade2": 4
+    }
+]
