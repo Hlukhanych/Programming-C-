@@ -9,32 +9,32 @@ namespace ex1
     internal class Sudent
     {
         private int recordBookNumber;
-        public int RecordBookNumber { get {  return recordBookNumber; } set {  recordBookNumber = value; } }
+        public int RecordBookNumber { get { return recordBookNumber; } set { recordBookNumber = value; } }
 
         private string surname;
-        public string Surname { get {  return surname; } set {  surname = value; } }
+        public string Surname { get { return surname; } set { surname = value; } }
 
         private string faculty;
-        public string Faculty { get {  return faculty; } set {  faculty = value; } }
+        public string Faculty { get { return faculty; } set { faculty = value; } }
 
         private int course;
-        public int Course { get {  return course; } set { course = value; } }
+        public int Course { get { return course; } set { course = value; } }
 
-        private string formOfEducation;
-        public string FormOfEducation { get {  return formOfEducation; } set {  formOfEducation = value; } }
+        private string studyForm;
+        public string StudyForm { get { return studyForm; } set { studyForm = value; } }
 
-        public Sudent(int recordBookNumber, string surname, string faculty, int course, string formOfEducation)
+        public Sudent(int recordBookNumber, string surname, string faculty, int course, string studyForm)
         {
             RecordBookNumber = recordBookNumber;
             Surname = surname;
             Faculty = faculty;
             Course = course;
-            FormOfEducation = formOfEducation;
+            StudyForm = studyForm;
         }
 
         public override string ToString()
         {
-            return $"RecordBookNumber: {RecordBookNumber}, Surname: {Surname}, Faculty: {Faculty}, Course: {Course}, FormOfEducation: {FormOfEducation}";
+            return $"RecordBookNumber: {RecordBookNumber}, Surname: {Surname}, Faculty: {Faculty}, Course: {Course}, StudyForm: {StudyForm}";
         }
     }
 }

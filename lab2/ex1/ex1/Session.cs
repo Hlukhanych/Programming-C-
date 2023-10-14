@@ -9,19 +9,19 @@ namespace ex1
     internal class Session
     {
         private int recordBookNumberS;
-        public int RecordBookNumberS { get {  return recordBookNumberS; } set {  recordBookNumberS = value; } }
+        public int RecordBookNumberS { get { return recordBookNumberS; } set { recordBookNumberS = value; } }
 
-        private List<string> name;
-        public List<string> Name { get {  return name; } set { name = value; } }
+        private List<string> subjectName;
+        public List<string> SubjectName { get { return subjectName; } set { subjectName = value; } }
 
-        private List<int> assessments;
-        public List<int> Assessments { get {  return assessments; } set {  assessments = value; } }
+        private List<int> grade;
+        public List<int> Grade { get { return grade; } set { grade = value; } }
 
-        public Session(int recordBookNumberS, List<string> name, List<int> assessments)
+        public Session(int recordBookNumberS, List<string> subjectName, List<int> grade)
         {
             RecordBookNumberS = recordBookNumberS;
-            Name = name;
-            Assessments = assessments;
+            SubjectName = subjectName;
+            Grade = grade;
         }
     }
 }
