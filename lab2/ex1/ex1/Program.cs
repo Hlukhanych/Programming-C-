@@ -21,24 +21,15 @@ namespace lab1
 
             List<Session> sessions = new List<Session>()
             {
-                new Session(1, new List<string> {"math", "programming", "physic", "english"}, new List<int> {4, 3, 5, 4}),
+                new Session(1, new List<string> {"math", "programming", "physic", "english"}, new List<int> {5, 4, 5, 4}),
                 new Session(2, new List<string> {"math", "english", "ukraine"}, new List<int> {3, 4, 5,}),
                 new Session(3, new List<string> {"math", "programming", "english"}, new List<int> {4, 5, 4}),
                 new Session(4, new List<string> {"math", "programming", "english"}, new List<int> {3, 4, 4}),
                 new Session(5, new List<string> {"math", "programming", "english"}, new List<int> {4, 5, 4}),
                 new Session(6, new List<string> {"math", "programming", "physic", "english"}, new List<int> {3, 4, 5, 4}),
-                new Session(7, new List<string> {"math", "english", "ukraine"}, new List<int> {3, 5, 5,}),
-                new Session(8, new List<string> {"math", "programming", "physic", "english", "engineering"}, new List<int> {4, 3, 5, 4, 5})
+                new Session(7, new List<string> {"math", "english", "ukraine"}, new List<int> {4, 5, 5,}),
+                new Session(8, new List<string> {"math", "programming", "physic", "english", "engineering"}, new List<int> {4, 5, 5, 4, 5})
             };
-
-            //var newList = students
-            //    .OrderBy(x => x.Course)
-            //    .Where(x => x.StudyForm == "zaochna");
-
-            //foreach (var student in newList)
-            //{
-            //    Console.WriteLine(student.ToString());
-            //}
 
             // a
             var partTimeStudentsPerFaculty = students
@@ -52,24 +43,22 @@ namespace lab1
             }
 
             // b
-            //var studentsWithScholarship = from student in students
-            //                              join session in sessions on student.RecordBookNumber equals session.RecordBookNumber
-            //                              where student.StudyForm == "Денна"
-            //                              group session by student into studentGroup
-            //                              where studentGroup.Average(s => s.Grade) >= 4
-            //                              orderby studentGroup.Key.Faculty
-            //                              select studentGroup.Key.Surname;
+            var studentsWithScholarship = students
+                .Join(sessions, student => student.RecordBookNumber, session => session.RecordBookNumberS, (student, session) => new { student, session })
+                .Where(combined => combined.student.StudyForm == "Денна" && combined.session.Grade.Average() >= 4)
+                .OrderBy(combined => combined.student.Faculty)
+                .Select(combined => combined.student.Surname);
 
-            //foreach (var surname in studentsWithScholarship)
-            //{
-            //    Console.WriteLine(surname);
-            //}
+            foreach (var surname in studentsWithScholarship)
+            {
+                Console.WriteLine(surname);
+            }
 
             // c
             var facultiesWithLeastHonors = sessions
+                .SelectMany(s => s.Grade, (s, grade) => new { s.RecordBookNumberS, Grade = grade })
                 .Where(s => s.Grade == 5)
-                .GroupBy(s => s.RecordBookNumber)
-                .Join(students, s => s.Key, student => student.RecordBookNumber, (s, student) => student.Faculty)
+                .Join(students, s => s.RecordBookNumberS, student => student.RecordBookNumber, (s, student) => student.Faculty)
                 .GroupBy(f => f)
                 .OrderBy(f => f.Count())
                 .Take(3)
