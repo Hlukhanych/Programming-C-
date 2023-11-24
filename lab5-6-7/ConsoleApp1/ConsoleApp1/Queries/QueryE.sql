@@ -1,0 +1,2 @@
+﻿SELECT DISTINCT AVG(SumOfOrder) AS AVGColumn
+FROM [Order]
