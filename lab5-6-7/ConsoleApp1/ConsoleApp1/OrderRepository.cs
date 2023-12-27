@@ -17,7 +17,7 @@ namespace ConsoleApp1
         public List<Order> GetAll()
         {
             var orders = new List<Order>();
-            string query = "SELECT * FROM Orders";
+            string query = "SELECT * FROM [Order]";
             using (SqlCommand command = new SqlCommand(query, _connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -31,55 +31,65 @@ namespace ConsoleApp1
                         order.NameOfOrder = Convert.ToString(reader["NameOfOrder"]);
                         order.SumOfOrder = Convert.ToInt32(reader["SumOfOrder"]);
                         order.LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"]);
+
                         orders.Add(order);
                     }
                 }
             }
             return orders;
         }
-        public List<Order> GetByName(string lastName)
+        public List<Order> GetByLastName(string lastName)
         {
             var orders = new List<Order>();
-            string querty = $"SELECT * FROM Orders WHERE LastName LIKE '{lastName}%';";
+            string querty = $"SELECT * FROM [Order] WHERE LastName LIKE '{lastName}%';";
             using (SqlCommand command = new SqlCommand(querty, _connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        Order order = new Order()
+                        if (lastName == Convert.ToString(reader["LastName"]))
                         {
-                            Id = Convert.ToInt32(reader["Id"]),
-                            LastName = Convert.ToString(reader["LastName"]),
-                            NameOfOrder = Convert.ToString(reader["NameOfOrder"]),
-                            SumOfOrder = Convert.ToInt32(reader["SumOfOrder"]),
-                            LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"])
-                        };
-                        orders.Add(order);
+                            Order order = new Order()
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                LastName = Convert.ToString(reader["LastName"]),
+                                NameOfOrder = Convert.ToString(reader["NameOfOrder"]),
+                                SumOfOrder = Convert.ToInt32(reader["SumOfOrder"]),
+                                LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"])
+                            };
+                            orders.Add(order);
+                        }
                     }
                 }
             }
             return orders;
         }
-        public List<Order> GetByLastNameEqualLastNameOfCustomer()
+        public List<Order> GetByLastNameEqualLastNameOfCustomer(int num)
         {
             var orders = new List<Order>();
-            string querty = $"SELECT * FROM Orders WHERE LastName = LastNameOfCustomer AND SumOfOrder <= 800";
+            string querty = $"SELECT * FROM [Order] WHERE LastName = LastNameOfCustomer AND SumOfOrder <= {num}";
             using (SqlCommand command = new SqlCommand(querty, _connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        Order order = new Order()
+                        if (Convert.ToString(reader["LastName"]) == Convert.ToString(reader["LastNameOfCustomer"]))
                         {
-                            Id = Convert.ToInt32(reader["Id"]),
-                            LastName = Convert.ToString(reader["LastName"]),
-                            NameOfOrder = Convert.ToString(reader["NameOfOrder"]),
-                            SumOfOrder = Convert.ToInt32(reader["SumOfOrder"]),
-                            LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"])
-                        };
-                        orders.Add(order);
+                            if (Convert.ToInt32(reader["SumOfOrder"]) <= num)
+                            {
+                                Order order = new Order()
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    LastName = Convert.ToString(reader["LastName"]),
+                                    NameOfOrder = Convert.ToString(reader["NameOfOrder"]),
+                                    SumOfOrder = Convert.ToInt32(reader["SumOfOrder"]),
+                                    LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"])
+                                };
+                                orders.Add(order);
+                            }
+                        }
                     }
                 }
             }
@@ -88,7 +98,7 @@ namespace ConsoleApp1
         public List<Order> GetDistinctNameOfOrder()
         {
             var orders = new List<Order>();
-            string querty = $"SELECT DISTINCT NameOfOrder FROM Orders";
+            string querty = $"SELECT DISTINCT * FROM [Order]";
             using (SqlCommand command = new SqlCommand(querty, _connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -104,6 +114,10 @@ namespace ConsoleApp1
                             LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"])
                         };
                         orders.Add(order);
+
+                        var uniqueValues = orders.Distinct().ToList();
+                        orders.Clear();
+                        orders.AddRange(uniqueValues);
                     }
                 }
             }
@@ -112,46 +126,58 @@ namespace ConsoleApp1
         public List<Order> GetAVG()
         {
             var orders = new List<Order>();
-            string querty = $"SELECT AVG(SumOfOrder) AS AVGColumn FROM Orders";
+            string querty = $"SELECT AVG(SumOfOrder) AS AVGColumn FROM [Order]";
             using (SqlCommand command = new SqlCommand(querty, _connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        Order order = new Order()
+                        if (reader["AVGColumn"] != DBNull.Value && reader["AVGColumn"] != null)
                         {
-                            Id = Convert.ToInt32(reader["Id"]),
-                            LastName = Convert.ToString(reader["LastName"]),
-                            NameOfOrder = Convert.ToString(reader["NameOfOrder"]),
-                            SumOfOrder = Convert.ToInt32(reader["SumOfOrder"]),
-                            LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"])
-                        };
-                        orders.Add(order);
+                            double averageValue = Convert.ToDouble(reader["AVGColumn"]);
+                            Console.WriteLine($"Average Order Sum: {averageValue}");
+                        }
                     }
                 }
             }
             return orders;
         }
+
+        public class OrderCount
+        {
+            public int NameOfOrderCount { get; set; }
+            public string NameOfOrder { get; set; }
+        }
         public List<Order> GetNameOfOrderCount()
         {
             var orders = new List<Order>();
-            string querty = $"SELECT COUNT(*) AS NameOfOrderCount, NameOfOrder FROM [Order] GROUP BY NameOfOrder HAVING COUNT(*)>=1;";
+            var orderCounts = new List<OrderCount>();
+            string querty = $"SELECT COUNT(*) AS NameOfOrderCount, NameOfOrder FROM [Order] GROUP BY NameOfOrder HAVING COUNT(*) >= 1";
             using (SqlCommand command = new SqlCommand(querty, _connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        Order order = new Order()
+                        if (reader["NameOfOrderCount"] != DBNull.Value && reader["NameOfOrder"] != DBNull.Value)
                         {
-                            Id = Convert.ToInt32(reader["Id"]),
-                            LastName = Convert.ToString(reader["LastName"]),
-                            NameOfOrder = Convert.ToString(reader["NameOfOrder"]),
-                            SumOfOrder = Convert.ToInt32(reader["SumOfOrder"]),
-                            LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"])
-                        };
-                        orders.Add(order);
+                            int count = Convert.ToInt32(reader["NameOfOrderCount"]);
+                            string nameOfOrder = Convert.ToString(reader["NameOfOrder"]);
+
+                            OrderCount orderCount = new OrderCount
+                            {
+                                NameOfOrderCount = count,
+                                NameOfOrder = nameOfOrder
+                            };
+
+                            orderCounts.Add(orderCount);
+                        }
+                    }
+
+                    foreach (OrderCount order in orderCounts)
+                    {
+                        Console.WriteLine($"{order.NameOfOrderCount} | {order.NameOfOrder}");
                     }
                 }
             }
@@ -160,7 +186,7 @@ namespace ConsoleApp1
         public List<Order> GetOrderBy()
         {
             var orders = new List<Order>();
-            string querty = $"SELECT  [Order].LastName, [Order].NameOfOrder, [Order].SumOfOrder FROM [Order] ORDER BY [Order].SumOfOrder;";
+            string querty = $"SELECT * FROM [Order] ORDER BY [Order].SumOfOrder";
             using (SqlCommand command = new SqlCommand(querty, _connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -177,14 +203,15 @@ namespace ConsoleApp1
                         };
                         orders.Add(order);
                     }
+                    orders.Sort((x, y) => x.SumOfOrder.CompareTo(y.SumOfOrder));
                 }
             }
             return orders;
         }
-        public bool Update(Order order)
+        public bool Update(int sum, int sum1)
         {
             using (SqlCommand command = new SqlCommand(
-               String.Format("UPDATE [Order] SET SumOfOrder = 600 WHERE SumOfOrder = 500;", order.LastName, order.SumOfOrder, order.NameOfOrder, order.LastNameOfCustpmer),
+               String.Format("UPDATE [Order] SET SumOfOrder = {0} WHERE SumOfOrder = {1}", sum, sum1),
                _connection))
             {
                 return command.ExecuteNonQuery() > 0;

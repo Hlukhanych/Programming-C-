@@ -17,7 +17,7 @@ namespace lab4
 
                 while (true)
                 {
-                Start: Console.WriteLine("Таблиця бібліотека. Введіть яку операцію ви хочете робити з таблицею:");
+                Start: Console.WriteLine("Введіть яку операцію ви хочете робити з таблицею:");
                     Console.WriteLine("а - вибрати всі замовленя;");
                     Console.WriteLine("b - вибрати замовлення за фамілією;");
                     Console.WriteLine("с - вибрати замовлення за фамілією замовника та відправника та сумою менше 800;");
@@ -25,8 +25,8 @@ namespace lab4
                     Console.WriteLine("e - знайти середнє арифметичне замовлень;");
                     Console.WriteLine("f - знайти кількість повторень замовлень;");
                     Console.WriteLine("g - відсортувати за сумою замовлення;");
-                    Console.WriteLine("h - редагування замовлення за ID");
-                    Console.WriteLine("exit - редагування книги за ID");
+                    Console.WriteLine("h - редагування замовлення");
+                    Console.WriteLine("exit - закінчити");
                     Console.WriteLine(":");
 
                     string request = Console.ReadLine();
@@ -34,6 +34,64 @@ namespace lab4
                     if (request.ToLower() == "a")
                     {
                         orders = rep.GetAll();
+                        foreach (Order order in orders)
+                        {
+                            Console.WriteLine($"{order.LastName}");
+                        }
+                    }
+                    else if (request.ToLower() == "b")
+                    {
+                        orders = rep.GetByLastName("Ivanov");
+                        foreach (Order order in orders)
+                        {
+                            Console.WriteLine($"{order.NameOfOrder}");
+                        }
+                    }
+                    else if (request.ToLower() == "c")
+                    {
+                        orders = rep.GetByLastNameEqualLastNameOfCustomer(2000);
+                        foreach (Order order in orders)
+                        {
+                            Console.WriteLine($"{order.NameOfOrder}");
+                        }
+                    }
+                    else if (request.ToLower() == "d")
+                    {
+                        orders = rep.GetDistinctNameOfOrder();
+                        foreach (Order order in orders)
+                        {
+                            Console.WriteLine($"{order.LastName} | {order.SumOfOrder} | {order.NameOfOrder}");
+                        }
+                    }
+                    else if (request.ToLower() == "e")
+                    {
+                        rep.GetAVG();
+                    }
+                    else if (request.ToLower() == "f")
+                    {
+                        rep.GetNameOfOrderCount();
+                    }
+                    else if (request.ToLower() == "g")
+                    {
+                        orders = rep.GetOrderBy();
+                        foreach (Order order in orders)
+                        {
+                            Console.WriteLine($"{order.LastName} | {order.SumOfOrder} | {order.NameOfOrder}");
+                        }
+                    }
+                    else if (request.ToLower() == "h")
+                    {
+                        rep.Update(700, 600);
+
+                        orders = rep.GetAll();
+                        foreach (Order order in orders)
+                        {
+                            Console.WriteLine($"{order.LastName} | {order.SumOfOrder} | {order.NameOfOrder}");
+                        }
+                    }
+                    else if (request.ToLower() == "exit")
+                    {
+                        break;
                     }
                 }
             }
