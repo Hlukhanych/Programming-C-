@@ -30,7 +30,7 @@ namespace ConsoleApp1
                         order.LastName = Convert.ToString(reader["LastName"]);
                         order.NameOfOrder = Convert.ToString(reader["NameOfOrder"]);
                         order.SumOfOrder = Convert.ToInt32(reader["SumOfOrder"]);
-                        order.LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"]);
+                        order.LastNameOfCustomer = Convert.ToString(reader["LastNameOfCustomer"]);
 
                         orders.Add(order);
                     }
@@ -56,7 +56,7 @@ namespace ConsoleApp1
                                 LastName = Convert.ToString(reader["LastName"]),
                                 NameOfOrder = Convert.ToString(reader["NameOfOrder"]),
                                 SumOfOrder = Convert.ToInt32(reader["SumOfOrder"]),
-                                LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"])
+                                LastNameOfCustomer = Convert.ToString(reader["LastNameOfCustomer"])
                             };
                             orders.Add(order);
                         }
@@ -85,7 +85,7 @@ namespace ConsoleApp1
                                     LastName = Convert.ToString(reader["LastName"]),
                                     NameOfOrder = Convert.ToString(reader["NameOfOrder"]),
                                     SumOfOrder = Convert.ToInt32(reader["SumOfOrder"]),
-                                    LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"])
+                                    LastNameOfCustomer = Convert.ToString(reader["LastNameOfCustomer"])
                                 };
                                 orders.Add(order);
                             }
@@ -111,7 +111,7 @@ namespace ConsoleApp1
                             LastName = Convert.ToString(reader["LastName"]),
                             NameOfOrder = Convert.ToString(reader["NameOfOrder"]),
                             SumOfOrder = Convert.ToInt32(reader["SumOfOrder"]),
-                            LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"])
+                            LastNameOfCustomer = Convert.ToString(reader["LastNameOfCustomer"])
                         };
                         orders.Add(order);
 
@@ -199,7 +199,7 @@ namespace ConsoleApp1
                             LastName = Convert.ToString(reader["LastName"]),
                             NameOfOrder = Convert.ToString(reader["NameOfOrder"]),
                             SumOfOrder = Convert.ToInt32(reader["SumOfOrder"]),
-                            LastNameOfCustpmer = Convert.ToString(reader["LastNameOfCustomer"])
+                            LastNameOfCustomer = Convert.ToString(reader["LastNameOfCustomer"])
                         };
                         orders.Add(order);
                     }
