@@ -1,0 +1,2 @@
+﻿SELECT DISTINCT NameOfOrder
+FROM [Order]
